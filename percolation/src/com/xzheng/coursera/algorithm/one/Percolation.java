@@ -2,6 +2,7 @@ package com.xzheng.coursera.algorithm.one;
 
 
 import com.sun.tools.javac.util.Assert;
+import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 /**
@@ -100,35 +101,7 @@ public class Percolation {
     }
 
     public static void main(String[] args) {
-        int n = 4;
-        Percolation percolation = new Percolation(n);
-        Assert.check(!percolation.percolates());
-        Assert.check(!percolation.isOpen(1,1));
-        Assert.check(!percolation.isOpen(n,n));
-
-        percolation.open(1,1);
-        Assert.check(percolation.isOpen(1,1));
-        Assert.check(percolation.isFull(1,1));
-        Assert.check(!percolation.percolates());
-
-        percolation.open(1,2);
-        percolation.open(1,3);
-        percolation.open(1,4);
-        Assert.check(percolation.percolates());
-
-
-        percolation = new Percolation(n);
-        percolation.open(1,1);
-        percolation.open(2,2);
-        percolation.open(3,3);
-        percolation.open(4,4);
-        Assert.check(!percolation.percolates());
-
-        percolation.open(2,1);
-        percolation.open(2,3);
-        percolation.open(3,4);
-        Assert.check(percolation.percolates());
-
+        System.out.println("hello world");
     }
 
 
