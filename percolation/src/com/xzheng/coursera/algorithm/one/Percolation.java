@@ -1,7 +1,6 @@
 package com.xzheng.coursera.algorithm.one;
 
 
-import com.sun.tools.javac.util.Assert;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
@@ -97,11 +96,24 @@ public class Percolation {
     }
 
     public boolean percolates() {
+        if (count == 1) {
+            //if only has one site, directly check if it's open or not.
+            return sites[0][0] == OPEN;
+        }
         return unionFinder.connected(virtualTop, virtualBottom);
     }
 
     public static void main(String[] args) {
-        System.out.println("hello world");
+        int N = StdIn.readInt();
+        Percolation percolation = new Percolation(N);
+        while (!StdIn.isEmpty()) {
+            int j = StdIn.readInt();
+            int i = StdIn.readInt();
+            if (!percolation.isOpen(i,j)) {
+                percolation.open(i,j);
+            }
+        }
+        System.out.printf("Percolation %s\n", percolation.percolates() ? "percolates" : "does NOT percolates");
     }
 
 
