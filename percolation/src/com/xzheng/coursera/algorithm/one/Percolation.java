@@ -54,7 +54,7 @@ public class Percolation {
     }
 
     private int getSiteUFIndex(int i, int j) {
-        return i + count * j + 1;
+        return j + count * i + 1;
     }
 
     public void open(int i, int j) {
@@ -62,32 +62,32 @@ public class Percolation {
 
         int ii = i-1;
         int jj = j-1;
-        sites[ii][jj] = OPEN;
+        sites[jj][ii] = OPEN;
 
         //connect the site's left, right, up, down sites.
         int indexUF = getSiteUFIndex(ii, jj);
-        if (ii > 0 && sites[ii-1][jj] == OPEN) {
+        if (jj > 0 && sites[jj-1][ii] == OPEN) {
             //connect left
-            unionFinder.union(indexUF, getSiteUFIndex(ii-1,jj));
+            unionFinder.union(indexUF, getSiteUFIndex(ii,jj-1));
 
         }
-        if (ii < count-1 && sites[ii+1][jj] == OPEN) {
+        if (jj < count-1 && sites[jj+1][ii] == OPEN) {
             //connect right
-            unionFinder.union(indexUF, getSiteUFIndex(ii+1,jj));
-        }
-        if (jj > 0 && sites[ii][jj-1] == OPEN ) {
-            //connect up
-            unionFinder.union(indexUF, getSiteUFIndex(ii,jj-1));
-        }
-        if (jj < count-1 && sites[ii][jj+1] == OPEN ) {
-            //connect down
             unionFinder.union(indexUF, getSiteUFIndex(ii,jj+1));
+        }
+        if (ii > 0 && sites[jj][ii-1] == OPEN ) {
+            //connect up
+            unionFinder.union(indexUF, getSiteUFIndex(ii-1,jj));
+        }
+        if (ii < count-1 && sites[jj][ii+1] == OPEN ) {
+            //connect down
+            unionFinder.union(indexUF, getSiteUFIndex(ii+1,jj));
         }
     }
 
     public boolean isOpen(int i, int j) {
         validate(i, j);
-        return sites[i-1][j-1] == OPEN;
+        return sites[j-1][i-1] == OPEN;
     }
 
     public boolean isFull(int i, int j) {
@@ -107,8 +107,8 @@ public class Percolation {
         int N = StdIn.readInt();
         Percolation percolation = new Percolation(N);
         while (!StdIn.isEmpty()) {
-            int j = StdIn.readInt();
             int i = StdIn.readInt();
+            int j = StdIn.readInt();
             if (!percolation.isOpen(i,j)) {
                 percolation.open(i,j);
             }
