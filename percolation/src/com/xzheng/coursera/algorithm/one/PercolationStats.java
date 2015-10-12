@@ -2,8 +2,6 @@ package com.xzheng.coursera.algorithm.one;
 
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
 
 /**
  * Created by xzheng on 15/10/11.
