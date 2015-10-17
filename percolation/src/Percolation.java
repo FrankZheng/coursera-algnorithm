@@ -1,6 +1,3 @@
-package com.xzheng.coursera.algorithm.one;
-
-
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
@@ -14,9 +11,9 @@ public class Percolation {
 
     private int[][] sites;
     private WeightedQuickUnionUF unionFinder;
-    int count;
-    int virtualTop;
-    int virtualBottom;
+    private int count;
+    private int virtualTop;
+    private int virtualBottom;
 
     public Percolation(int n) {
         validate(n);
@@ -28,14 +25,17 @@ public class Percolation {
         int num = n * n + 2;
         unionFinder = new WeightedQuickUnionUF(num);
 
-        //connect the virtual top site with the sites at first row.
-        //connect the virtual bottom site with the sites at bottom row.
         virtualTop = 0;
         virtualBottom = n*n+1;
+
+        //connect the virtual top site with the sites at first row.
+        //connect the virtual bottom site with the sites at bottom row.
+        /*
         for (int i = 1 ; i <= n ; i++) {
             unionFinder.union(virtualTop, i);
             unionFinder.union(virtualBottom - i, virtualBottom);
         }
+        */
     }
 
     private void validate(int n) {
@@ -83,6 +83,14 @@ public class Percolation {
             //connect down
             unionFinder.union(indexUF, getSiteUFIndex(ii+1,jj));
         }
+        if (ii == 0) {
+            //connect virtual top
+            unionFinder.union(indexUF, virtualTop);
+        }
+        if ( ii == count - 1 ) {
+            //connect virtual bottom
+            unionFinder.union(indexUF, virtualBottom);
+        }
     }
 
     public boolean isOpen(int i, int j) {
@@ -96,10 +104,6 @@ public class Percolation {
     }
 
     public boolean percolates() {
-        if (count == 1) {
-            //if only has one site, directly check if it's open or not.
-            return sites[0][0] == OPEN;
-        }
         return unionFinder.connected(virtualTop, virtualBottom);
     }
 

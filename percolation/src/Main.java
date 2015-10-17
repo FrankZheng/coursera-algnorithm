@@ -1,5 +1,3 @@
-package com.xzheng.coursera.algorithm.one;
-
 import com.sun.tools.javac.util.Assert;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
