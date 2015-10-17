@@ -44,11 +44,11 @@ public class Percolation {
         }
     }
 
-    private void validate(int i, int j ) {
-        if(i < 1 || i > count ) {
+    private void validate(int i, int j) {
+        if (i < 1 || i > count ) {
             throw new IndexOutOfBoundsException("i should between 1 and " + count);
         }
-        if(j < 1 || j > count) {
+        if (j < 1 || j > count) {
             throw new IndexOutOfBoundsException("j should between 1 and " + count);
         }
     }
@@ -68,26 +68,26 @@ public class Percolation {
         int indexUF = getSiteUFIndex(ii, jj);
         if (jj > 0 && sites[jj-1][ii] == OPEN) {
             //connect left
-            unionFinder.union(indexUF, getSiteUFIndex(ii,jj-1));
+            unionFinder.union(indexUF, getSiteUFIndex(ii, jj-1));
 
         }
         if (jj < count-1 && sites[jj+1][ii] == OPEN) {
             //connect right
-            unionFinder.union(indexUF, getSiteUFIndex(ii,jj+1));
+            unionFinder.union(indexUF, getSiteUFIndex(ii, jj+1));
         }
-        if (ii > 0 && sites[jj][ii-1] == OPEN ) {
+        if (ii > 0 && sites[jj][ii-1] == OPEN) {
             //connect up
-            unionFinder.union(indexUF, getSiteUFIndex(ii-1,jj));
+            unionFinder.union(indexUF, getSiteUFIndex(ii-1, jj));
         }
-        if (ii < count-1 && sites[jj][ii+1] == OPEN ) {
+        if (ii < count-1 && sites[jj][ii+1] == OPEN) {
             //connect down
-            unionFinder.union(indexUF, getSiteUFIndex(ii+1,jj));
+            unionFinder.union(indexUF, getSiteUFIndex(ii+1, jj));
         }
         if (ii == 0) {
             //connect virtual top
             unionFinder.union(indexUF, virtualTop);
         }
-        if ( ii == count - 1 ) {
+        if (ii == count - 1) {
             //connect virtual bottom
             unionFinder.union(indexUF, virtualBottom);
         }
@@ -100,7 +100,7 @@ public class Percolation {
 
     public boolean isFull(int i, int j) {
         validate(i, j);
-        return unionFinder.connected(virtualTop, getSiteUFIndex(i-1,j-1));
+        return unionFinder.connected(virtualTop, getSiteUFIndex(i-1, j-1));
     }
 
     public boolean percolates() {
@@ -113,11 +113,15 @@ public class Percolation {
         while (!StdIn.isEmpty()) {
             int i = StdIn.readInt();
             int j = StdIn.readInt();
-            if (!percolation.isOpen(i,j)) {
-                percolation.open(i,j);
+            if (!percolation.isOpen(i, j)) {
+                percolation.open(i, j);
             }
         }
-        System.out.printf("Percolation %s\n", percolation.percolates() ? "percolates" : "does NOT percolates");
+        String result = "percolates";
+        if (!percolation.percolates()) {
+            result = "does NOT percolates";
+        }
+        System.out.printf("Percolation %s\n", result);
     }
 
 

@@ -22,20 +22,20 @@ public class PercolationStats {
 
         thresholds = new double[T];
         int sites = N * N;
-        for (int k = 0 ; k < thresholds.length ; k++) {
+        for (int k = 0; k < thresholds.length; k++) {
             Percolation percolation = new Percolation(N);
             int openSites = 0;
-            while(openSites < sites) {
+            while (openSites < sites) {
                 //open a random blocked site
                 int i = StdRandom.uniform(1, N+1);
                 int j = StdRandom.uniform(1, N+1);
                 if (!percolation.isOpen(i,j)) {
-                    percolation.open(i,j);
+                    percolation.open(i, j);
                     openSites++;
 
                     //if percolates, compute the the threshold and record.
                     if (percolation.percolates()) {
-                        thresholds[k] = (double)openSites / (double)sites;
+                        thresholds[k] = (double) openSites / (double) sites;
                         break;
                     }
                 }
