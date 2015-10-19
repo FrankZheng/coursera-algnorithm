@@ -1,3 +1,4 @@
+import com.sun.tools.javac.util.Assert;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
@@ -45,7 +46,7 @@ public class Percolation {
     }
 
     private void validate(int i, int j) {
-        if (i < 1 || i > count ) {
+        if (i < 1 || i > count) {
             throw new IndexOutOfBoundsException("i should between 1 and " + count);
         }
         if (j < 1 || j > count) {
@@ -108,6 +109,7 @@ public class Percolation {
     }
 
     public static void main(String[] args) {
+        /*
         int N = StdIn.readInt();
         Percolation percolation = new Percolation(N);
         while (!StdIn.isEmpty()) {
@@ -122,6 +124,22 @@ public class Percolation {
             result = "does NOT percolates";
         }
         System.out.printf("Percolation %s\n", result);
+        */
+        Percolation percolation = new Percolation(3);
+        percolation.open(1,3);
+        Assert.check(percolation.isFull(1,3));
+        percolation.open(2,3);
+        Assert.check(percolation.isFull(2,3));
+        percolation.open(3,3);
+        Assert.check(percolation.isFull(3,3));
+        percolation.open(3,1);
+        Assert.check(!percolation.isFull(3,1));
+
+        percolation.open(2,1);
+        percolation.open(1,1);
+
+        Assert.check(percolation.percolates());
+
     }
 
 
